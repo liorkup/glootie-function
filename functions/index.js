@@ -24,46 +24,36 @@ admin.initializeApp();
 exports.googleAdsConversionResult = functions.https.onCall(async (data) => {
 
     const advertisingId = data.advertisingId;
+    const lat = dat.lat || 0;
     const timestamp = Math.floor(new Date() / 1000);
 
     if (!advertisingId) {
-    // Throwing an HttpsError so that the client gets the error details.
-    throw new functions.https.HttpsError('invalid-argument', 'The function must be called with ' +
-        'a valid advertisingId');
+        // Throwing an HttpsError so that the client gets the error details.
+        throw new functions.https.HttpsError('invalid-argument', 'The function must be called with ' +
+            'a valid advertisingId');
     }
 
     const api = 'https://www.googleadservices.com/pagead/conversion/app/1.0?';
 
     const params = {
-        rdid : advertisingId,
-        timestamp : timestamp,
-        dev_token : "0TMeIjcYszPrTnQaBn_r_Q", //todo: - remove on commit
-        link_id : 'FEB5615B16A3F3E6E97D44ED7BD967B4', //todo: - new linkid of my app. remove on commit
-        app_event_type : "custom",
+        rdid: advertisingId,
+        timestamp: timestamp,
+        dev_token: '123', //todo: - remove on commit
+        link_id: '123', //todo: - new linkid of my app. remove on commit
+        app_event_type: "custom",
         app_event_name: "ddl_action",
-        id_type : "advertisingid",
-        lat : 0,
-        app_version : 1,
-        os_version : 1,
-        sdk_version : 1
+        id_type: "advertisingid",
+        lat: lat,
+        app_version: 1,
+        os_version: 1,
+        sdk_version: 1
     };
 
-    // axios.interceptors.request.use(request => {
-    //     console.log('Starting Request', request)
-    //     return request
-    //   })
-
     let url = api.concat(qs.stringify(params));
-    let result =  await axios.post(url)
+    return await axios.post(url)
         .then(res => res.data)
         .catch(error => console.log(error));
-    
-    let googleAd = result['attributed'] && { ad_group_id : result['ad_events'][0]['ad_group_id'] };
 
-    return googleAd || { ad_group_id : undefined };
-
-
-       
 });
 
 
