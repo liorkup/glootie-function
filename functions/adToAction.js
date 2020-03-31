@@ -1,5 +1,5 @@
 const remoteConfig = require('./remoteConfig');
-const s2sAPI = require('./s2sTest');
+const s2sAPI = require('./s2sAPI');
 
 const adToAction = async (data) => {
     const s2sPromise = s2sAPI.call(data);
@@ -7,7 +7,7 @@ const adToAction = async (data) => {
     let [s2sResponse, rcValue] = await Promise.all([s2sPromise, rcPromise]);
 
     if(!s2sResponse['attributed']) {
-        return null;
+        return {action : null};
     }
 
     const {ad_group_id, campaign_id} = s2sResponse['ad_events'][0];
