@@ -3,28 +3,30 @@ const serviceAccount = require("./serviceAccountKey.json");
 const axios = require('axios');
 const SCOPES = ['https://www.googleapis.com/auth/firebase.remoteconfig'];
 const PROJECT_ID = "mapps-emea";
-let token = null;
 
 exports.getAdActionValue = async () => {
 
-    const api = 'https://firebaseremoteconfig.googleapis.com/v1/projects/' + PROJECT_ID + '/remoteConfig';
-
-    if(!token) {
-        token = await getAccessToken();
-    }
-
+    const api = `https://firebaseremoteconfig.googleapis.com/v1/projects/${PROJECT_ID}/remoteConfig`;
     const instance = axios.create();
-    const response = instance.request({
-        baseURL: api,
-        timeout: 3000,
-        headers: {'Authorization': 'Bearer ' + token, 'Accept-Encoding': 'gzip'}
-    });
 
-    return response.then(res => {
-        const parameters = res.data.parameters;
-        const value = parameters['ad_to_action'] && parameters['ad_to_action']['defaultValue']['value'];
-        return JSON.parse(value);
-    });
+    return getAccessToken()
+        .then(accessToken => {
+            return instance.request({
+                baseURL: api,
+                timeout: 3000,
+                headers: {'Authorization': `Bearer ${accessToken}`,
+                    'Accept-Encoding': 'gzip'}
+            })
+        }).then(res => {
+            const parameters = res.data.parameters;
+            const value = parameters['ad_to_action'] &&
+                parameters['ad_to_action']['defaultValue']['value'];
+            return JSON.parse(value);
+        }).catch(e => {
+            console.log(e);
+            return {};
+        });
+
 
     function getAccessToken() {
         return new Promise(function (resolve, reject) {
