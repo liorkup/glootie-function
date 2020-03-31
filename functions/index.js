@@ -18,12 +18,11 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const s2s = require('./s2s');
+const s2sTest = require('./s2sTest');
 admin.initializeApp();
 
 exports.googleAdsConversionResult = functions.https.onCall(s2s);
-
-
-exports.test = functions.https.onCall(() =>  {return {"hello": "world"}});
+exports.googleAdsConversionResultTest = functions.https.onCall(s2sTest);
 
 
 
