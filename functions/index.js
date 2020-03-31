@@ -17,44 +17,13 @@
 
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const axios = require('axios');
-const qs = require('qs');
+const s2s = require('./s2s');
 admin.initializeApp();
 
-exports.googleAdsConversionResult = functions.https.onCall(async (data) => {
+exports.googleAdsConversionResult = functions.https.onCall(s2s);
 
-    const advertisingId = data.advertisingId;
-    const lat = dat.lat || 0;
-    const timestamp = Math.floor(new Date() / 1000);
 
-    if (!advertisingId) {
-        // Throwing an HttpsError so that the client gets the error details.
-        throw new functions.https.HttpsError('invalid-argument', 'The function must be called with ' +
-            'a valid advertisingId');
-    }
-
-    const api = 'https://www.googleadservices.com/pagead/conversion/app/1.0?';
-
-    const params = {
-        rdid: advertisingId,
-        timestamp: timestamp,
-        dev_token: '123', //todo: - remove on commit
-        link_id: '123', //todo: - new linkid of my app. remove on commit
-        app_event_type: "custom",
-        app_event_name: "ddl_action",
-        id_type: "advertisingid",
-        lat: lat,
-        app_version: 1,
-        os_version: 1,
-        sdk_version: 1
-    };
-
-    let url = api.concat(qs.stringify(params));
-    return await axios.post(url)
-        .then(res => res.data)
-        .catch(error => console.log(error));
-
-});
+exports.test = functions.https.onCall(() =>  {return {"hello": "world"}});
 
 
 
