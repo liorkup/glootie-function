@@ -1,7 +1,7 @@
 const axios = require('axios');
 const qs = require('qs');
 
-module.exports = async (data) => {
+module.exports.call = async (data) => {
 
     const advertisingId = data.advertisingId;
     const lat = data.lat || 0;
