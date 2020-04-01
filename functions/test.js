@@ -17,3 +17,5 @@ async function s2sAPITest () {
     console.log(await s2sAPI.call(data));
 }
 
+test();
+
