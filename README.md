@@ -23,8 +23,14 @@ cd  <folder>
 npm install
 firebase use --add
 ```
+### Add Oauth2.0 key json
+
+Firebase UI -> Settings ->  Service Accounts -> Generate private key (Node.js)
+
 ### Write the function
 In: index.js
+
+
 ### test locally
 ```bash
 firebase serve --only hosting,functions
