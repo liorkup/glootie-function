@@ -35,7 +35,7 @@ bash firebase emulators:start --only functions
 
 Find the http paths printed to the screen, e.g.: http://localhost:5001/mapps-emea/us-central1/testS2S  
   
-#### Call the testS2S & testRC and testAll functions
+#### Call the testS2S, testRC & testAll functions
 
 e.g.:   
   
@@ -48,6 +48,7 @@ e.g.:
      
 - http://localhost:5001/mapps-emea/us-central1//testAll?advertisingId=bf256fa0-3eed-430c-a1ca-6a4916641836&lat=0  
   - Expected response: The action object: ```{"action":<action name>}```, or, ```{"action":null}``` if not attributed or Remote Config doesn't contains the campaign mapping  
+
   
   
 ### Deploy 
