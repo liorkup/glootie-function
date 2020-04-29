@@ -18,10 +18,35 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const adToAction = require('./adToAction');
+const remoteConfig = require('./remoteConfig');
+const s2sAPI = require('./s2sAPI');
 
 admin.initializeApp();
 
 exports.googleAdsConversionResult = functions.https.onCall(adToAction);
+
+
+exports.testS2S = functions.https.onRequest((req, res) => {
+    s2sAPI.call(req.query)
+    .catch(e => res.send("Error"))
+    .then(ad => res.send(ad));
+
+});
+
+exports.testRC = functions.https.onRequest((req, res) => {
+ remoteConfig.getAdActionValue()
+    .catch(e => res.send("Error"))
+    .then(rc => res.send(rc));
+
+});
+
+exports.testAll = functions.https.onRequest((req, res) => {
+                   adToAction()
+                      .catch(e => res.send("Error"))
+                      .then(action => res.send(action));
+
+});
+
 
 
 
