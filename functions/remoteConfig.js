@@ -22,9 +22,6 @@ exports.getAdActionValue = async () => {
             const value = parameters['ad_to_action'] &&
                 parameters['ad_to_action']['defaultValue']['value'];
             return JSON.parse(value);
-        }).catch(e => {
-            console.log(e);
-            return {};
         });
 
 
