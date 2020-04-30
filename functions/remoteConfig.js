@@ -13,7 +13,7 @@ exports.getAdActionValue = async () => {
         .then(accessToken => {
             return instance.request({
                 baseURL: api,
-                timeout: 3000,
+                timeout: 1000,
                 headers: {'Authorization': `Bearer ${accessToken}`,
                     'Accept-Encoding': 'gzip'}
             })

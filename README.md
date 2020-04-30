@@ -8,22 +8,24 @@
    
 ### Install Project   
 ```
-bash cd  <folder> npm install
+bash cd  <main folder> npm install
  ```   
 
 ### Login & select the Firebase project 
 ```
 bash firebase login firebase use --add   
 ``` 
-### Add Oauth2.0 key to access Remote Config    
+### Configure Remote Config access   
 
-In Firebase UI: Settings -> Service Accounts -> Generate private key (Node.js)   
+- Generate Oauth2.0 key : In Firebase UI: Settings -> Service Accounts -> Generate private key (Node.js)   
   
-Save file instead of functions/[serviceAccountKey.json](https://github.com/liorkup/glootie-function/blob/master/functions/serviceAccountKey.json "serviceAccountKey.json")   
+- Save file as \<main folder\>/functions/[serviceAccountKey.json](https://github.com/liorkup/glootie-function/blob/master/functions/serviceAccountKey.json "serviceAccountKey.json")   
+
+- Set your Firebase Project Id under _PROJECT_ID_ param in remoteConfig.js (Firebase Project Id is located in: Settings -> General)
     
-### Configure S2S API   
+### Configure S2S API access   
  
-In the [s2sAPI.js](https://github.com/liorkup/glootie-function/blob/master/functions/s2sAPI.js "s2sAPI.js") file, set your dev_token & link_id values in _params_ object.  
+In the [s2sAPI.js](https://github.com/liorkup/glootie-function/blob/master/functions/s2sAPI.js "s2sAPI.js") file, set your _dev_token_ & _link_id_ values in _params_ object.  
     
 ### Test locally 
 
