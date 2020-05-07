@@ -17,31 +17,31 @@
 
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const remoteConfig = require('./remoteConfig');
+//const mappingService = require('./remoteConfig');
+const mappingService = require('./storageMapping');
 const s2sAPI = require('./s2sAPI');
 
 const MINUTE_IN_MILLI = 1000 * 60;
 const TIME_TO_REFRESH_IN_MINUTES = 60;
 
-let rcValue;
-let s2sResponse;
+let mapping;
 let lastUpdate;
-let EMPTY_RES = {action : null};
+const EMPTY_RES = {action : null};
 
 
 const isHourFromLastUpdate = () =>
-    (new Date().getTime() - lastUpdate.getTime()) / MINUTE_IN_MILLI >= TIME_TO_REFRESH_IN_MINUTES;
+    !lastUpdate || (new Date().getTime() - lastUpdate.getTime()) / MINUTE_IN_MILLI >= TIME_TO_REFRESH_IN_MINUTES;
 
 admin.initializeApp();
 
 const adToAction = async (data) => {
 
     const s2sPromise = s2sAPI.call(data);
-
+    let s2sResponse;
     try {
-        if(!lastUpdate || isHourFromLastUpdate()) {
-            let rcPromise = remoteConfig.getAdActionValue();
-            [s2sResponse, rcValue] = await Promise.all([s2sPromise, rcPromise]);
+        if(isHourFromLastUpdate()) {
+            let mappingPromise = mappingService.getAdActionValue();
+            [s2sResponse, mapping] = await Promise.all([s2sPromise, mappingPromise]);
         } else {
             s2sResponse = await s2sPromise;
         }
@@ -50,8 +50,7 @@ const adToAction = async (data) => {
     }
 
     const {ad_group_id, campaign_id} = s2sResponse['attributed'] && s2sResponse['ad_events'][0];
-    const {adGroupIds, campaignIds} = rcValue;
-
+    const {adGroupIds, campaignIds} = mapping;
     return !s2sResponse['attributed'] &&  EMPTY_RES ||
         {action : adGroupIds && adGroupIds[ad_group_id] || campaignIds && campaignIds[campaign_id] || null};
 

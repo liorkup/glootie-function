@@ -2,18 +2,22 @@
   
     
 ### Install Firebase CLI    
- ```
- bash npm install -g firebase-tools npm i -g firebase-admin
+ ```bash 
+npm install -g firebase-tools npm i -g firebase-admin
  ```    
    
 ### Install Project   
-```
-bash cd  <main folder> npm install
+```bash 
+cd  <main folder>
+npm install
+cd functions
+npm install
+cd ..
  ```   
 
 ### Login & select the Firebase project 
-```
-bash firebase login firebase use --add   
+```bash 
+firebase login firebase use --add   
 ``` 
 ### Configure Remote Config access   
 
@@ -31,8 +35,8 @@ In the [s2sAPI.js](https://github.com/liorkup/glootie-function/blob/master/funct
 
 #### Run:
 
-``` 
-bash firebase emulators:start --only functions 
+```bash 
+firebase emulators:start --only functions 
 ``` 
 
 Find the http paths printed to the screen, e.g.: http://localhost:5001/mapps-emea/us-central1/testS2S  
@@ -55,6 +59,6 @@ e.g.:
   
 ### Deploy 
 
-```
-bash firebase deploy --only functions:googleAdsConversionResult 
+```bash 
+firebase deploy --only functions:googleAdsConversionResult 
 ```
