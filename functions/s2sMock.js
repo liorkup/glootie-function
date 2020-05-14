@@ -15,7 +15,7 @@ module.exports = async (data) => {return {
         "keyword": "+space +birds",
         "match_type": "b",
         "placement": null,
-        "ad_group_id": 123456789,
+        "ad_group_id": null,
         "creative_id": 123456789,
         "timestamp": 1432681913.123456
     }],
