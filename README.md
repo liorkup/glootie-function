@@ -2,18 +2,22 @@
   
     
 ### Install Firebase CLI    
- ```
- bash npm install -g firebase-tools npm i -g firebase-admin
+ ```bash 
+npm install -g firebase-tools npm i -g firebase-admin
  ```    
    
 ### Install Project   
-```
-bash cd  <main folder> npm install
+```bash 
+cd  <main folder>
+npm install
+cd functions
+npm install
+cd ..
  ```   
 
 ### Login & select the Firebase project 
-```
-bash firebase login firebase use --add   
+```bash 
+firebase login firebase use --add   
 ``` 
 ### Configure Remote Config access   
 
@@ -31,13 +35,13 @@ In the [s2sAPI.js](https://github.com/liorkup/glootie-function/blob/master/funct
 
 #### Run:
 
-``` 
-bash firebase emulators:start --only functions 
+```bash 
+firebase emulators:start --only functions 
 ``` 
 
 Find the http paths printed to the screen, e.g.: http://localhost:5001/mapps-emea/us-central1/testS2S  
   
-#### Call the testS2S, testRC & testAll functions
+#### Call the testS2S, testRC & testAllMock functions
 
 e.g.:   
   
@@ -48,13 +52,13 @@ e.g.:
   - Expected response: The S2S call returned object. 
 	  - e.g.: ```{"ad_events":[],"errors":[],"attributed":false}``` if not attributed
      
-- http://localhost:5001/mapps-emea/us-central1/testAll?advertisingId=bf256fa0-3eed-430c-a1ca-6a4916641836&lat=0  
-  - Expected response: The action object: ```{"action":<action name>}```, or, ```{"action":null}``` if not attributed or Remote Config doesn't contains the campaign mapping  
+- http://localhost:5001/mapps-emea/us-central1/testAllMock?advertisingId=bf256fa0-3eed-430c-a1ca-6a4916641836&lat=0  
+  - Expected response: The action object: ```{"action":<action name>}```, or, ```{"action":null}``` in case your Remote Config mapping doesn't contains the campaignId '123456789' from the S2Smock   
 
   
   
 ### Deploy 
 
-```
-bash firebase deploy --only functions:googleAdsConversionResult 
+```bash 
+firebase deploy --only functions:adToAction,adToActionMock 
 ```
