@@ -1,4 +1,4 @@
-module.exports = async (data) => {return {
+module.exports.call = async (data) => {return {
     "ad_events": [{
         "ad_event_id": "Q2owS0VRancwZHk0QlJDdXVMX2U1TQ",
         "conversion_metric": "conversion",

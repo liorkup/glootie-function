@@ -33,6 +33,12 @@ In the [s2sAPI.js](https://github.com/liorkup/glootie-function/blob/master/funct
     
 ### Test locally 
 
+```bash 
+npm test
+``` 
+
+### Test as functions 
+
 #### Run:
 
 ```bash 
