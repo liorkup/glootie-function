@@ -60,5 +60,5 @@ e.g.:
 ### Deploy 
 
 ```bash 
-firebase deploy --only functions:adToAction,adToActionMock 
+firebase deploy --only functions:adToAction,functions:adToActionMock 
 ```
