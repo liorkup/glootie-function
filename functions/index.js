@@ -57,10 +57,14 @@ const getAction = async (data, s2s) => {
 
 };
 
+// Firebase Functions to call from Android/ iOS:
+
 exports.adToAction = functions.https.onCall(async (data) => getAction(data, s2sAPI));
 
 exports.adToActionMock = functions.https.onCall(async (data) => getAction(data, s2sMock));
 
+
+// Only for tests:
 
 exports.testS2S = functions.https.onRequest((req, res) =>
     s2sAPI.call(req.query)
