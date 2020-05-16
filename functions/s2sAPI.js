@@ -9,8 +9,7 @@ module.exports.call = async (data) => {
 
     if (!advertisingId) {
         // Throwing an HttpsError so that the client gets the error details.
-        throw new functions.https.HttpsError('invalid-argument', 'The function must be called with ' +
-            'a valid advertisingId');
+        throw new Error(`invalid rdid: "${advertisingId}"; The function must be called with a valid advertisingId`);
     }
 
     const api = 'https://www.googleadservices.com/pagead/conversion/app/1.0?';
