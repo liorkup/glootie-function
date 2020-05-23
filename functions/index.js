@@ -22,7 +22,7 @@ const s2sAPI = require('./s2sAPI');
 const s2sMock = require('./s2sMock');
 
 const MINUTE_IN_MILLI = 1000 * 60;
-const TIME_TO_REFRESH_IN_MINUTES = 60;
+const TIME_TO_REFRESH_IN_MINUTES = 5;
 
 let mapping;
 let lastUpdate;
