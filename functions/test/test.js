@@ -13,7 +13,7 @@ describe('AdToAction Tests', function() {
         it("Action should not be null if campaignId: '123456789' is set in RC", async function() {
             const res = await adToActionTest(data, s2sMock)
                 .catch(error => console.log(error));
-            expect(res).to.have.all.keys('action', 'adGroupId', 'campaignId');
+            expect(res).to.have.all.keys('action', 'adGroupId', 'campaignId', 'timestamp');
             assert.notEqual(res.action, null);
         });
 
@@ -22,7 +22,7 @@ describe('AdToAction Tests', function() {
         it('Should return any valid adToAction Firebase Function respionse', async function() {
             const res = await adToActionTest(data, s2sAPI)
                 .catch(error => console.log(error));
-            expect(res).to.have.all.keys('action', 'adGroupId', 'campaignId');
+            expect(res).to.have.all.keys('action', 'adGroupId', 'campaignId', 'timestamp');
         });
     });
     describe('Test remote config', function() {
