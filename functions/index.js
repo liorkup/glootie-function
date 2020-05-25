@@ -26,7 +26,7 @@ const TIME_TO_REFRESH_IN_MINUTES = 5;
 
 let mapping;
 let lastUpdate;
-const EMPTY_RES = {campaignId: null, adGroupId: null, action : null};
+const EMPTY_RES = {campaignId: null, adGroupId: null, action : null, timestamp: null};
 
 
 const isHourFromLastUpdate = () =>
@@ -49,11 +49,12 @@ const getAction = async (data, s2s) => {
         return EMPTY_RES;
     }
 
-    const {ad_group_id, campaign_id} = s2sResponse['attributed'] && s2sResponse['ad_events'][0];
+    const {ad_group_id, campaign_id, timestamp} = s2sResponse['attributed'] && s2sResponse['ad_events'][0];
     const {adGroupIds, campaignIds} = mapping;
     return !s2sResponse['attributed'] &&  EMPTY_RES ||
         {campaignId: campaign_id,  adGroupId: ad_group_id,
-            action : adGroupIds && adGroupIds[ad_group_id] || campaignIds && campaignIds[campaign_id] || null};
+            action : adGroupIds && adGroupIds[ad_group_id] || campaignIds && campaignIds[campaign_id] || null,
+            timestamp: timestamp};
 
 };
 
