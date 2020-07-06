@@ -19,7 +19,7 @@ module.exports.call = async (data) => {
         timestamp: timestamp,
         dev_token: '123',
         link_id: '123',
-        app_event_type: "session_start",
+        app_event_type: "first_open",
         id_type: "advertisingid",
         lat: lat,
         app_version: 1,
